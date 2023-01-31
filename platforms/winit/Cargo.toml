@@ -13,7 +13,12 @@ edition = "2021"
 [dependencies]
 accesskit = { version = "0.8.1", path = "../../common" }
 parking_lot = "0.12.1"
-winit = { version = "0.27.2", default-features = false, features = ["x11", "wayland", "wayland-dlopen"] }
+
+[dependencies.winit]
+version = "0.27"
+git = "https://github.com/iced-rs/winit.git"
+rev = "940457522e9fb9f5dac228b0ecfafe0138b4048c"
+features = ["x11", "wayland", "wayland-dlopen"]
 
 [target.'cfg(target_os = "windows")'.dependencies]
 accesskit_windows = { version = "0.10.4", path = "../windows" }
@@ -25,4 +30,4 @@ accesskit_macos = { version = "0.4.2", path = "../macos" }
 accesskit_unix = { version = "0.1.1", path = "../unix" }
 
 [dev-dependencies]
-winit = "0.27.2"
+winit = {version = "0.27", git = "https://github.com/iced-rs/winit.git", rev = "940457522e9fb9f5dac228b0ecfafe0138b4048c", features = ["x11", "wayland", "wayland-dlopen"]}
