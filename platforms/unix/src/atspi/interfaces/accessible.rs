@@ -197,11 +197,11 @@ impl AccessibleInterface<PlatformRootNode> {
     }
 
     fn get_role_name(&self) -> String {
-        Role::Application.to_string()
+        "application".into()
     }
 
     fn get_localized_role_name(&self) -> String {
-        Role::Application.to_string()
+        "application".into()
     }
 
 
