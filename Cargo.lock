@@ -64,6 +64,7 @@ dependencies = [
  "async-channel",
  "atspi",
  "futures-lite",
+ "log",
  "serde",
  "zbus",
 ]
@@ -2350,7 +2351,7 @@ checksum = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
 [[package]]
 name = "winit"
 version = "0.27.2"
-source = "git+https://github.com/iced-rs/winit.git?rev=940457522e9fb9f5dac228b0ecfafe0138b4048c#940457522e9fb9f5dac228b0ecfafe0138b4048c"
+source = "git+https://github.com/pop-os/winit.git?branch=iced#d35712bba65eb1dad8f6f546af49b96fdad9467e"
 dependencies = [
  "bitflags",
  "cocoa",

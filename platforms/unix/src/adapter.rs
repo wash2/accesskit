@@ -22,6 +22,7 @@ use atspi::{Interface, InterfaceSet, State};
 use futures_lite::StreamExt;
 use std::sync::Arc;
 use zbus::Task;
+use log::debug;
 
 pub struct Adapter {
     atspi_bus: Bus,
@@ -51,7 +52,9 @@ impl Adapter {
         let tree = Tree::new(initial_state());
         let app_context = AppContext::new(app_name, toolkit_name, toolkit_version);
         let context = Context::new(tree, action_handler, app_context);
-        atspi_bus.register_root_node(&context).ok()?;
+        let bus_successful = atspi_bus.register_root_node(&context).ok()?;
+        debug!("Registered root node: {}", bus_successful);
+
         let adapter = Adapter {
             atspi_bus,
             _event_task: event_task,

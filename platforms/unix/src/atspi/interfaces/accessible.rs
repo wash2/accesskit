@@ -89,6 +89,14 @@ impl AccessibleInterface<PlatformNode> {
         self.node.role()
     }
 
+    fn get_role_name(&self) -> fdo::Result<String> {
+        self.node.role().map(|role| role.to_string())
+    }
+
+    fn get_localized_role_name(&self) -> fdo::Result<String> {
+        self.node.role().map(|role| role.to_string())
+    }
+
     fn get_state(&self) -> fdo::Result<StateSet> {
         self.node.state()
     }
@@ -187,6 +195,15 @@ impl AccessibleInterface<PlatformRootNode> {
     fn get_role(&self) -> Role {
         Role::Application
     }
+
+    fn get_role_name(&self) -> String {
+        Role::Application.to_string()
+    }
+
+    fn get_localized_role_name(&self) -> String {
+        Role::Application.to_string()
+    }
+
 
     fn get_state(&self) -> StateSet {
         StateSet::new(State::Enabled | State::Sensitive | State::Visible | State::Showing | State::Focusable)
