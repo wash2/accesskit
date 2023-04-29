@@ -7,7 +7,7 @@ use crate::{
     atspi::{ObjectId, ObjectRef, OwnedObjectAddress},
     unknown_object, PlatformNode, PlatformRootNode,
 };
-use atspi::{accessible::Role, Interface, InterfaceSet, StateSet, State};
+use atspi::{accessible::Role, Interface, InterfaceSet, State, StateSet};
 use std::convert::TryInto;
 use zbus::{fdo, names::OwnedUniqueName, MessageHeader};
 
@@ -204,9 +204,10 @@ impl AccessibleInterface<PlatformRootNode> {
         "application".into()
     }
 
-
     fn get_state(&self) -> StateSet {
-        StateSet::new(State::Enabled | State::Sensitive | State::Visible | State::Showing | State::Focusable)
+        StateSet::new(
+            State::Enabled | State::Sensitive | State::Visible | State::Showing | State::Focusable,
+        )
     }
 
     fn get_application(

@@ -20,9 +20,9 @@ use accesskit_consumer::{DetachedNode, FilterResult, Node, Tree, TreeChangeHandl
 use async_channel::{Receiver, Sender};
 use atspi::{Interface, InterfaceSet, State};
 use futures_lite::StreamExt;
+use log::debug;
 use std::sync::Arc;
 use zbus::Task;
-use log::debug;
 
 pub struct Adapter {
     atspi_bus: Bus,
