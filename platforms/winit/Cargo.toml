@@ -17,9 +17,9 @@ default = ["accesskit_unix"]
 accesskit = { version = "0.11.0", path = "../../common" }
 
 [dependencies.winit]
-version = "0.27"
+version = "0.28"
 git = "https://github.com/pop-os/winit.git"
-branch = "iced"
+branch = "master"
 features = ["x11", "wayland", "wayland-dlopen"]
 
 [target.'cfg(target_os = "windows")'.dependencies]
@@ -32,4 +32,4 @@ accesskit_macos = { version = "0.7.0", path = "../macos" }
 accesskit_unix = { version = "0.4.0", path = "../unix", optional = true }
 
 [dev-dependencies]
-winit = {version = "0.27", git = "https://github.com/pop-os/winit.git", branch = "iced", features = ["x11", "wayland", "wayland-dlopen"]}
+winit = {version = "0.28", git = "https://github.com/pop-os/winit.git", branch = "master", features = ["x11", "wayland", "wayland-dlopen"]}
