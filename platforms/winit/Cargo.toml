@@ -17,7 +17,7 @@ tokio = ["accesskit_unix/tokio"]
 
 [dependencies]
 accesskit = { version = "0.11.0", path = "../../common" }
-winit = { version = "0.28", default-features = false }
+winit = { git = "https://github.com/iced-rs/winit.git", rev = "b91e39ece2c0d378c3b80da7f3ab50e17bb798a5", default-features = false }
 
 [target.'cfg(target_os = "windows")'.dependencies]
 accesskit_windows = { version = "0.14.0", path = "../windows" }
@@ -27,6 +27,7 @@ accesskit_macos = { version = "0.7.1", path = "../macos" }
 
 [target.'cfg(any(target_os = "linux", target_os = "dragonfly", target_os = "freebsd", target_os = "openbsd", target_os = "netbsd"))'.dependencies]
 accesskit_unix = { version = "0.5.0", path = "../unix", optional = true, default-features = false }
+winit = { git = "https://github.com/iced-rs/winit.git", rev = "b91e39ece2c0d378c3b80da7f3ab50e17bb798a5",  default-features = false, features = ["x11", "wayland"] }
 
 [dev-dependencies]
-winit = "0.28"
+winit = { git = "https://github.com/iced-rs/winit.git", rev = "b91e39ece2c0d378c3b80da7f3ab50e17bb798a5" }
