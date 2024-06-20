@@ -182,4 +182,12 @@ impl AccessibleInterface<PlatformRootNode> {
     fn get_interfaces(&self) -> InterfaceSet {
         InterfaceSet::new(Interface::Accessible | Interface::Application)
     }
+
+    fn get_role_name(&self) -> String {
+        Role::Application.to_string()
+    }
+
+    fn get_localized_role_name(&self) -> String {
+        Role::Application.to_string()
+    }
 }
