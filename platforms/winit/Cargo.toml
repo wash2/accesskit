@@ -23,9 +23,13 @@ tokio = ["accesskit_unix/tokio"]
 
 [dependencies]
 accesskit = { version = "0.16.0", path = "../../common" }
-winit = { version = "0.30", default-features = false }
-rwh_05 = { package = "raw-window-handle", version = "0.5", features = ["std"], optional = true }
-rwh_06 = { package = "raw-window-handle", version = "0.6", features = ["std"], optional = true }
+winit = { git = "https://github.com/rust-windowing/winit.git", rev = "241b7a80bba96c91fa3901729cd5dec66abb9be4", default-features = false }
+rwh_05 = { package = "raw-window-handle", version = "0.5", features = [
+    "std",
+], optional = true }
+rwh_06 = { package = "raw-window-handle", version = "0.6", features = [
+    "std",
+], optional = true }
 
 [target.'cfg(target_os = "windows")'.dependencies]
 accesskit_windows = { version = "0.22.0", path = "../windows" }
@@ -37,6 +41,7 @@ accesskit_macos = { version = "0.17.0", path = "../macos" }
 accesskit_unix = { version = "0.12.0", path = "../unix", optional = true, default-features = false }
 
 [dev-dependencies.winit]
-version = "0.30"
+git = "https://github.com/rust-windowing/winit.git"
+rev = "241b7a80bba96c91fa3901729cd5dec66abb9be4"
 default-features = false
 features = ["x11", "wayland", "wayland-dlopen", "wayland-csd-adwaita"]

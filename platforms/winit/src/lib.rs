@@ -78,92 +78,11 @@ pub enum WindowEvent {
     AccessibilityDeactivated,
 }
 
-struct WinitActivationHandler<T: From<Event> + Send + 'static> {
-    window_id: WindowId,
-    proxy: EventLoopProxy<T>,
-}
-
-impl<T: From<Event> + Send + 'static> ActivationHandler for WinitActivationHandler<T> {
-    fn request_initial_tree(&mut self) -> Option<TreeUpdate> {
-        let event = Event {
-            window_id: self.window_id,
-            window_event: WindowEvent::InitialTreeRequested,
-        };
-        self.proxy.send_event(event.into()).ok();
-        None
-    }
-}
-
-struct WinitActionHandler<T: From<Event> + Send + 'static> {
-    window_id: WindowId,
-    proxy: EventLoopProxy<T>,
-}
-
-impl<T: From<Event> + Send + 'static> ActionHandler for WinitActionHandler<T> {
-    fn do_action(&mut self, request: ActionRequest) {
-        let event = Event {
-            window_id: self.window_id,
-            window_event: WindowEvent::ActionRequested(request),
-        };
-        self.proxy.send_event(event.into()).ok();
-    }
-}
-
-struct WinitDeactivationHandler<T: From<Event> + Send + 'static> {
-    window_id: WindowId,
-    proxy: EventLoopProxy<T>,
-}
-
-impl<T: From<Event> + Send + 'static> DeactivationHandler for WinitDeactivationHandler<T> {
-    fn deactivate_accessibility(&mut self) {
-        let event = Event {
-            window_id: self.window_id,
-            window_event: WindowEvent::AccessibilityDeactivated,
-        };
-        self.proxy.send_event(event.into()).ok();
-    }
-}
-
 pub struct Adapter {
     inner: platform_impl::Adapter,
 }
 
 impl Adapter {
-    /// Creates a new AccessKit adapter for a winit window. This must be done
-    /// before the window is shown for the first time. This means that you must
-    /// use [`winit::window::WindowAttributes::with_visible`] to make the window
-    /// initially invisible, then create the adapter, then show the window.
-    ///
-    /// This constructor uses a winit event loop proxy to deliver AccessKit
-    /// events to the main event loop. The primary disadvantage of this approach
-    /// is that it's not possible to synchronously return an initial tree
-    /// in response to the [`WindowEvent::InitialTreeRequested`] event,
-    /// so some platform adapters will have to use a temporary placeholder tree
-    /// until you send the first update. For an optimal implementation,
-    /// consider using [`Adapter::with_direct_handlers`] or
-    /// [`Adapter::with_mixed_handlers`] instead.
-    pub fn with_event_loop_proxy<T: From<Event> + Send + 'static>(
-        window: &Window,
-        proxy: EventLoopProxy<T>,
-    ) -> Self {
-        let window_id = window.id();
-        let activation_handler = WinitActivationHandler {
-            window_id,
-            proxy: proxy.clone(),
-        };
-        let action_handler = WinitActionHandler {
-            window_id,
-            proxy: proxy.clone(),
-        };
-        let deactivation_handler = WinitDeactivationHandler { window_id, proxy };
-        Self::with_direct_handlers(
-            window,
-            activation_handler,
-            action_handler,
-            deactivation_handler,
-        )
-    }
-
     /// Creates a new AccessKit adapter for a winit window. This must be done
     /// before the window is shown for the first time. This means that you must
     /// use [`winit::window::WindowAttributes::with_visible`] to make the window
@@ -178,7 +97,7 @@ impl Adapter {
     /// the first update. However, remember that each of these handlers may be
     /// called on any thread, depending on the underlying platform adapter.
     pub fn with_direct_handlers(
-        window: &Window,
+        window: &dyn Window,
         activation_handler: impl 'static + ActivationHandler + Send,
         action_handler: impl 'static + ActionHandler + Send,
         deactivation_handler: impl 'static + DeactivationHandler + Send,
@@ -192,42 +111,11 @@ impl Adapter {
         Self { inner }
     }
 
-    /// Creates a new AccessKit adapter for a winit window. This must be done
-    /// before the window is shown for the first time. This means that you must
-    /// use [`winit::window::WindowAttributes::with_visible`] to make the window
-    /// initially invisible, then create the adapter, then show the window.
-    ///
-    /// This constructor provides a mix of the approaches used by
-    /// [`Adapter::with_event_loop_proxy`] and [`Adapter::with_direct_handlers`].
-    /// It uses the event loop proxy for the action request and deactivation
-    /// events, which can be handled asynchronously with no drawback,
-    /// while using a direct, caller-provided activation handler that can
-    /// return the initial tree synchronously. Remember that the thread on which
-    /// the activation handler is called is platform-dependent.
-    pub fn with_mixed_handlers<T: From<Event> + Send + 'static>(
-        window: &Window,
-        activation_handler: impl 'static + ActivationHandler + Send,
-        proxy: EventLoopProxy<T>,
-    ) -> Self {
-        let window_id = window.id();
-        let action_handler = WinitActionHandler {
-            window_id,
-            proxy: proxy.clone(),
-        };
-        let deactivation_handler = WinitDeactivationHandler { window_id, proxy };
-        Self::with_direct_handlers(
-            window,
-            activation_handler,
-            action_handler,
-            deactivation_handler,
-        )
-    }
-
     /// Allows reacting to window events.
     ///
     /// This must be called whenever a new window event is received
     /// and before it is handled by the application.
-    pub fn process_event(&mut self, window: &Window, event: &WinitWindowEvent) {
+    pub fn process_event(&mut self, window: &dyn Window, event: &WinitWindowEvent) {
         self.inner.process_event(window, event);
     }
 
