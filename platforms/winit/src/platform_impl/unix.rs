@@ -43,13 +43,13 @@ impl Adapter {
                     .unwrap_or_default()
                     .cast::<f64>()
                     .into();
-                let inner_size: (_, _) = window.inner_size().cast::<f64>().into();
+                let inner_size: (_, _) = window.surface_size().cast::<f64>().into();
                 self.set_root_window_bounds(
                     Rect::from_origin_size(outer_position, outer_size),
                     Rect::from_origin_size(inner_position, inner_size),
                 )
             }
-            WindowEvent::Resized(inner_size) => {
+            WindowEvent::SurfaceResized(inner_size) => {
                 let outer_position: (_, _) = window
                     .outer_position()
                     .unwrap_or_default()
