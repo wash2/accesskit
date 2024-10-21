@@ -16,7 +16,7 @@ pub struct Adapter {
 
 impl Adapter {
     pub fn new(
-        window: &Window,
+        window: &dyn Window,
         activation_handler: impl 'static + ActivationHandler,
         action_handler: impl 'static + ActionHandler,
         _deactivation_handler: impl 'static + DeactivationHandler,
@@ -44,7 +44,7 @@ impl Adapter {
         }
     }
 
-    pub fn process_event(&mut self, _window: &Window, event: &WindowEvent) {
+    pub fn process_event(&mut self, _window: &dyn Window, event: &WindowEvent) {
         if let WindowEvent::Focused(is_focused) = event {
             if let Some(events) = self.adapter.update_view_focus_state(*is_focused) {
                 events.raise();
