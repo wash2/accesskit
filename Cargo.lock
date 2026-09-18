@@ -542,7 +542,7 @@ checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
 [[package]]
 name = "dpi"
 version = "0.1.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 
 [[package]]
 name = "dyn-clone"
@@ -1418,6 +1418,16 @@ name = "raw-window-handle"
 version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539"
+
+[[package]]
+name = "redox_event"
+version = "0.4.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3514da49aa6ca4cff5088a1b382ef3a0d9149964d29bb49ebd03fd66cc575a18"
+dependencies = [
+ "bitflags",
+ "libredox",
+]
 
 [[package]]
 name = "redox_syscall"
@@ -2589,7 +2599,7 @@ checksum = "d6bbff5f0aada427a1e5a6da5f1f98158182f26556f345ac9e04d36d0ebed650"
 [[package]]
 name = "winit"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "cfg_aliases",
@@ -2615,7 +2625,7 @@ dependencies = [
 [[package]]
 name = "winit-android"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "android-activity",
  "bitflags",
@@ -2630,7 +2640,7 @@ dependencies = [
 [[package]]
 name = "winit-appkit"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "block2 0.6.2",
@@ -2652,7 +2662,7 @@ dependencies = [
 [[package]]
 name = "winit-common"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "memmap2",
  "objc2 0.6.3",
@@ -2667,7 +2677,7 @@ dependencies = [
 [[package]]
 name = "winit-core"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "cursor-icon",
@@ -2681,14 +2691,14 @@ dependencies = [
 [[package]]
 name = "winit-orbital"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "dpi",
  "libredox",
  "orbclient",
  "raw-window-handle 0.6.2",
- "redox_syscall 0.7.0",
+ "redox_event",
  "smol_str",
  "tracing",
  "winit-core",
@@ -2697,7 +2707,7 @@ dependencies = [
 [[package]]
 name = "winit-uikit"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "block2 0.6.2",
@@ -2717,7 +2727,7 @@ dependencies = [
 [[package]]
 name = "winit-wayland"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "ahash",
  "bitflags",
@@ -2743,7 +2753,7 @@ dependencies = [
 [[package]]
 name = "winit-web"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "atomic-waker",
  "bitflags",
@@ -2765,7 +2775,7 @@ dependencies = [
 [[package]]
 name = "winit-win32"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "cursor-icon",
@@ -2781,7 +2791,7 @@ dependencies = [
 [[package]]
 name = "winit-x11"
 version = "0.31.0-beta.2"
-source = "git+https://github.com/pop-os/winit.git?tag=cosmic-0.14#a610ac9c7a72b39ff102ed4d946291618dc725b6"
+source = "git+https://github.com/pop-os/winit.git?branch=iced-0.14-rebase#9567503d34130113e36b0167a2b8829c3756e429"
 dependencies = [
  "bitflags",
  "bytemuck",
