@@ -20,7 +20,7 @@ tokio = ["accesskit_unix/tokio"]
 
 [dependencies]
 accesskit = { version = "0.22.0", path = "../../common" }
-winit = { git = "https://github.com/pop-os/winit.git", tag = "cosmic-0.14", default-features = false }
+winit = { git = "https://github.com/pop-os/winit.git", rev = "9567503", default-features = false }
 rwh_05 = { package = "raw-window-handle", version = "0.5", features = [
     "std",
 ], optional = true }
@@ -44,7 +44,7 @@ accesskit_android = { version = "0.5.0", path = "../android", optional = true, f
 
 [dev-dependencies.winit]
 git = "https://github.com/pop-os/winit.git"
-tag = "cosmic-0.14"
+rev = "9567503"
 default-features = false
 features = ["x11", "wayland", "wayland-dlopen", "wayland-csd-adwaita"]
 
