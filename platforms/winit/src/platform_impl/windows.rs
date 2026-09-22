@@ -17,7 +17,7 @@ pub struct Adapter {
 impl Adapter {
     pub fn new(
         _event_loop: &dyn ActiveEventLoop,
-        window: &Window,
+        window: &dyn Window,
         activation_handler: impl 'static + ActivationHandler,
         action_handler: impl 'static + ActionHandler + Send,
         _deactivation_handler: impl 'static + DeactivationHandler,
