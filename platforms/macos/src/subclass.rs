@@ -255,6 +255,13 @@ impl SubclassingAdapter {
     }
 }
 
+// SAFETY: SubclassingAdapter is always created and accessed on the main thread.
+// The Send + Sync bounds are required by iced's Proxy<T> / Notifier trait,
+// which wraps the adapter in a channel — but actual accessibility callbacks
+// only ever fire on the main thread.
+unsafe impl Send for SubclassingAdapter {}
+unsafe impl Sync for SubclassingAdapter {}
+
 impl Drop for SubclassingAdapter {
     fn drop(&mut self) {
         let prev_class = self.associated.ivars().prev_class;
